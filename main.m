@@ -1,6 +1,7 @@
 
 
-profile = csvread('cav_level.csv');
+file_name = 'A5_2026_TES.csv';
+profile = csvread(file_name);
 profile = transpose(profile);
 
 % Ungetestet: normieren der Zeitreihe
@@ -10,11 +11,11 @@ profile = transpose(profile);
 profile = profile - min(profile(:))
 profile = profile ./ max(profile(:))
 
-#[cycle] = zyklendetektion(profile, 0.001)
+%[cycle] = zyklendetektion(profile, 0.001)
 [cycle] = zyklendetektion(profile, 0.25)
 
 % Vektor 4xn mit Spalten: "t_1", "t_3", "Minimum", "DOC"
-csvwrite('cycles.csv', transpose(cycle));
+csvwrite(strcat('results_', file_name), transpose(cycle));
 
 %disp(cycle)
 
