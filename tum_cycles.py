@@ -2,9 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # data (comes from matlab since octaves' findpeaks does no work properly!)
-df = pd.read_csv('cycles_05.csv')
-df.columns = ['t1', 't3', 'minimum', 'doc']
-df['amplitude'] = df['doc']
+df = pd.read_csv('results_A5_2026_TES.csv', index_col=0)
+print(df)
 df['duration'] = df['t3'] - df['t1']
 df['amplitude'] = df['amplitude'] * 211.11  # scale back to nominal capacity
 
