@@ -8,6 +8,24 @@ import numpy as np
 import pandas as pd
 
 def detect_cycles(path):
+    """
+    Detect cycles: Read input data and search for cycles.
+
+    Parameters
+    ----------
+    path : str
+        Path to the input .csv-file.
+
+    Returns
+    -------
+    cycles : pandas.core.frame.DataFrame
+        Dataframe containing the cycles start times, end times, local minima
+        and amplitude.
+
+    Note
+    ----
+    The DataFrame's collumns are 't_start', 't_end', 't_minimum' and 'amplitude'.
+    """
 
     # read input data from .csv file
     series = pd.read_csv(path, names=['values'], header=None)
@@ -18,18 +36,32 @@ def detect_cycles(path):
 
     # calculate cycles
     cycles = find_cycles(series['norm'])
+    print(type(series['norm']))
     return cycles
 
 def find_cycles(series_norm):
     """
+    Search the normalised time series for cycles and detect start times, end times,
+    local minimima and amplitudes with the corresponding functions.
 
+    Parameters
+    ----------
+    series_norm : pandas.core.series.Series
+        Normalised input time series.
+
+    Returns
+    -------
+    df : pandas.core.frame.DataFrame
+        Dataframe containing the cycles start times, end times, local minima
+        and amplitude.
     """
     # find minima and maxima
-    min_idx, max_idx = detect_peaks_idx(series_norm)
+    min_idx, max_idx = find_peaks_idx(series_norm)
+    # find start and end times
     t_start = soc_find_start(series_norm, max_idx)
     t_end = soc_find_end(series_norm, max_idx)
 
-    # precalculation for cycles
+    # precalculation of the cycles
     precycles = search_precycle(series_norm, max_idx, t_start, t_end)
 
     # remove rows with zeros only and remove duplicates
@@ -39,23 +71,52 @@ def find_cycles(series_norm):
     # cycle detection
     cycles = cycling(precycles_mod)
 
+    # calculate the amplitude of the cycles
     cycles[:, 3] = calc_amplitude(series_norm, cycles)
+
+    # write data to DataFrame
     df = pd.DataFrame()
-    df['t1'] = cycles[:, 0]
-    df['t3'] = cycles[:, 1]
-    df['minimum'] = cycles[:, 2]
+    df['t_start'] = cycles[:, 0]
+    df['t_end'] = cycles[:, 1]
+    df['t_minimum'] = cycles[:, 2]
     df['amplitude'] = cycles[:, 3]
+
     return df
 
 
-def detect_peaks_idx(series):
+def find_peaks_idx(series):
     """
+    Find the indices of local minima and maxima:
 
+    - Calculate the difference of neighboring values in the series.
+    - Search for sign changes in the differences.
+    - Remove sign changes for zeros (zero has an own sign in numpy).
+    - Iterate over indices of the sign changes:
+
+        - local minimum, if gradient before sign change is negative.
+        - local maximum, if gradient before sign change is positive.
+
+    - Remove first local minimum/maximum, if it is the first value of the series.
+
+    Parameters
+    ----------
+    series : pandas.core.series.Series
+        Input series to find local minima and maxima in.
+
+    Returns
+    -------
+    min_idx : list
+        List with the indices of local minima in the series.
+
+    max_idx : list
+        List with the indices of local maxima in the series.
     """
-    # calculate difference between neibhoring values
+    # calculate difference between neighboring values
     diff = np.diff(np.concatenate(([0], series, [0])))
     # calculate sign changes
     asign = np.sign(diff)
+
+    # remove sign changes for zero
     sz = asign == 0
     while sz.any():
         asign[sz] = np.roll(asign, 1)[sz]
@@ -66,6 +127,7 @@ def detect_peaks_idx(series):
     max_idx = []
     start = series[0]
 
+    # iterate over indices of sign changes
     for index in np.where(signchange == 1)[0]:
         if start > 0:
             max_idx += [index - 1]
@@ -74,6 +136,7 @@ def detect_peaks_idx(series):
             min_idx += [index - 1]
             start = diff[index]
 
+    # remove first sign change, if at first value of series
     if min_idx[0] <= 0:
         min_idx = min_idx[1:]
     if max_idx[0] <= 0:
@@ -83,7 +146,22 @@ def detect_peaks_idx(series):
 
 
 def soc_find_start(series, indices):
+    """
+    Find the starting times of the cycles.
 
+    Parameters
+    ----------
+    series : pandas.core.series.Series
+        Input series.
+
+    indices : list
+        The indices of local maxima in the time series.
+
+    Returns
+    -------
+    t : list
+        List  of start times.
+    """
     t = []
 
     size = len(indices)
@@ -102,7 +180,22 @@ def soc_find_start(series, indices):
 
 
 def soc_find_end(series, indices):
+    """
+    Find the ending times of the cycles.
 
+    Parameters
+    ----------
+    series : pandas.core.series.Series
+        Input series.
+
+    indices : list
+        The indices of local maxima in the time series.
+
+    Returns
+    -------
+    t : list
+        List  of end times.
+    """
     t = []
 
     size = len(indices)
@@ -121,7 +214,28 @@ def soc_find_end(series, indices):
 
 
 def search_precycle(series, indices, t_start, t_end):
+    """
+    Precalculation of the cycles.
 
+    Parameters
+    ----------
+    series : pandas.core.series.Series
+        Input series.
+
+    indices : list
+        The indices of local maxima in the time series.
+
+    t_start : list
+        List of starting times.
+
+    t_end : list
+        List of ending times.
+
+    Returns
+    -------
+    pre : numpy.ndarray
+        List  of end times.
+    """
     size = len(indices)
     pre_a = np.zeros((size, 4))
     pre_b = np.zeros((size, 4))
@@ -143,11 +257,25 @@ def search_precycle(series, indices, t_start, t_end):
             pre_b[c, 2] = values.index(min(values)) + indices[c]
             pre_b[c, 3] = min(values)
 
-    return np.append(pre_a, pre_b, axis=0)
+    # concatenate the two arrays
+    pre = np.append(pre_a, pre_b, axis=0)
+    return pre
 
 
 def cycling(rows):
+    """
+    Cycle detection, delete from precycles if ...?
 
+    Parameters
+    ----------
+    rows : numpy.ndarray
+        Modified precycles.
+
+    Returns
+    -------
+    rows : numpy.ndarray
+        Array of cycles.
+    """
     # remove rows
     for c in range(rows.shape[0]):
         indices = np.where((rows[c, 2] == rows[:, 2]) &
@@ -163,7 +291,22 @@ def cycling(rows):
 
 
 def calc_amplitude(series, pre):
+    """
+    Calculation of the cycles amplitude.
 
+    Parameters
+    ----------
+    series : pandas.core.series.Series
+        Input series.
+
+    pre : numpy.ndarray
+        Array of precycles.
+
+    Returns
+    -------
+    amp : numpy.ndarray
+        Array of corresponding amplitudes.
+    """
     num = pre.shape[0]
     amp = np.zeros(num)
 
