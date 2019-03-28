@@ -318,7 +318,11 @@ def search_precycle(series, indices, t_start, t_end):
 
 def cycling(rows):
     """
-    Cycle detection from given precycles.
+    Cycle detection from given precycles by removing overlapping precycles:
+
+    From all precycles with the same timestamp for the minimum value only the
+    most narrow precycle is kept. The most narrow precycle is defined by the
+    latest starting and the earliest ending time.
 
     Parameters
     ----------
@@ -347,7 +351,8 @@ def cycling(rows):
 
 def calc_doc(series, rows):
     r"""
-    Calculation of the depths of cycle.
+    Calculation of the depths of cycle: The depths of the cycle is the minimum
+    height between the minimum value of the cycle and the bordering peaks.
 
     .. math::
 
