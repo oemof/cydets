@@ -7,13 +7,13 @@
 import numpy as np
 import pandas as pd
 
-def detect_cycles(path):
+def detect_cycles(series):
     r"""
     This function detects cycles in a time series with information on start
     time, end time and depths of cycle:
 
     - Read time series from supplied :code:`path`.
-    - Normalize input time series c:
+    - Normalize values of time series ts:
 
     .. math::
 
@@ -28,25 +28,33 @@ def detect_cycles(path):
 
         ts_{norm} \text{: normalised}
 
-    - find peaks (and valley) of the series.
+    - find peaks (and valleys) of the series.
       (:func:`cycle_detection.find_peaks_valleys_idx`).
     - find possible starting and ending points for precycles
       (:func:`cycle_detection.soc_find_start`,
       :func:`cycle_detection.soc_find_end`).
     - identify precycles (:func:`cycle_detection.search_precycle`)
-    - identify actual cycles by removing overlapping precycles.
-    - calculate the depths of the actual cycles.
+    - identify actual cycles by removing overlapping precycles (
+      :func:`cycle_detection.cycling`).
+    - calculate the depths of the actual cycles (
+      :func:`cycle_detection.calc_doc`).
 
     Parameters
     ----------
-    path : str
-        Path to the input .csv-file.
+    series : pandas.core.series.Series
+        Input time series.
 
     Returns
     -------
     df : pandas.core.frame.DataFrame
         Dataframe containing the cycles start times, end times, local minima
         and depth of cycle (doc).
+
+    Example
+    -------
+    >>> from cycle_detection import dc
+    >>> generiere Time_Series und speicher als .csv
+    >>> cycles = dc(series)
 
     Note
     ----
@@ -56,7 +64,7 @@ def detect_cycles(path):
     """
 
     # read input data from .csv file
-    series = pd.read_csv(path, names=['values'], header=None)
+    series = series.to_frame()
 
     # norm input data
     series['norm'] = series['values'] - series['values'].min()
