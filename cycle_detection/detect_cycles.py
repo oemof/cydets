@@ -7,13 +7,13 @@
 import numpy as np
 import pandas as pd
 
-def detect_cycles(path):
+def detect_cycles(series):
     r"""
     This function detects cycles in a time series with information on start
     time, end time and depths of cycle:
 
     - Read time series from supplied :code:`path`.
-    - Normalize input time series c:
+    - Normalize values of time series ts:
 
     .. math::
 
@@ -28,25 +28,37 @@ def detect_cycles(path):
 
         ts_{norm} \text{: normalised}
 
-    - find peaks (and valley) of the series.
+    - find peaks (and valleys) of the series.
       (:func:`cycle_detection.find_peaks_valleys_idx`).
     - find possible starting and ending points for precycles
       (:func:`cycle_detection.soc_find_start`,
       :func:`cycle_detection.soc_find_end`).
     - identify precycles (:func:`cycle_detection.search_precycle`)
-    - identify actual cycles by removing overlapping precycles.
-    - calculate the depths of the actual cycles.
+    - identify actual cycles by removing overlapping precycles (
+      :func:`cycle_detection.cycling`).
+    - calculate the depths of the actual cycles (
+      :func:`cycle_detection.calc_doc`).
 
     Parameters
     ----------
-    path : str
-        Path to the input .csv-file.
+    series : pandas.core.series.Series
+        Input time series.
 
     Returns
     -------
     df : pandas.core.frame.DataFrame
         Dataframe containing the cycles start times, end times, local minima
         and depth of cycle (doc).
+
+    Example
+    -------
+    >>> from cycle_detection import dc
+    >>> import pandas as pd
+    >>> arr = np.random.randint(10, size=50)
+    >>> series = pd.Series(arr.tolist())
+    >>> cycles = dc(series)
+    >>> type(cycles)
+    <class 'pandas.core.frame.DataFrame'>
 
     Note
     ----
@@ -56,7 +68,7 @@ def detect_cycles(path):
     """
 
     # read input data from .csv file
-    series = pd.read_csv(path, names=['values'], header=None)
+    series = series.to_frame(name='values')
 
     # norm input data
     series['norm'] = series['values'] - series['values'].min()
@@ -306,7 +318,11 @@ def search_precycle(series, indices, t_start, t_end):
 
 def cycling(rows):
     """
-    Cycle detection from given precycles.
+    Cycle detection from given precycles by removing overlapping precycles:
+
+    From all precycles with the same timestamp for the minimum value only the
+    most narrow precycle is kept. The most narrow precycle is defined by the
+    latest starting and the earliest ending time.
 
     Parameters
     ----------
@@ -335,7 +351,8 @@ def cycling(rows):
 
 def calc_doc(series, rows):
     r"""
-    Calculation of the depths of cycle.
+    Calculation of the depths of cycle: The depths of the cycle is the minimum
+    height between the minimum value of the cycle and the bordering peaks.
 
     .. math::
 
