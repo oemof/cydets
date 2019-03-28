@@ -53,7 +53,7 @@ def detect_cycles(series):
     Example
     -------
     >>> from cycle_detection import dc
-    >>> generiere Time_Series und speicher als .csv
+    >>> series = pd.S
     >>> cycles = dc(series)
 
     Note
