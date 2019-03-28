@@ -53,8 +53,12 @@ def detect_cycles(series):
     Example
     -------
     >>> from cycle_detection import dc
-    >>> series = pd.S
+    >>> import pandas as pd
+    >>> arr = np.random.randint(10, size=50)
+    >>> series = pd.Series(arr.tolist())
     >>> cycles = dc(series)
+    >>> type(cycles)
+    <class 'pandas.core.frame.DataFrame'>
 
     Note
     ----
@@ -64,7 +68,7 @@ def detect_cycles(series):
     """
 
     # read input data from .csv file
-    series = series.to_frame()
+    series = series.to_frame(name='values')
 
     # norm input data
     series['norm'] = series['values'] - series['values'].min()
