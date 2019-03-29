@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-def detect_cycles(series):
+def detect_cycles(series, drop_zero_amplitudes=True):
     r"""
     Detect cycles in a time series with information on start, end and depths.
 
@@ -90,6 +90,10 @@ def detect_cycles(series):
     df['t_minimum'] = cycles[:, 2]
     df['doc'] = cycles[:, 3]
     df['duration'] = df['t_end'] - df['t_start']
+
+    # drop cycles where the amplitude (doc) is zero
+    if drop_zero_amplitudes is True:
+        df = df.drop(df[df['doc'] == 0].index)
 
     return df
 
