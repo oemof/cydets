@@ -56,7 +56,7 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
 Citation
 ========
 
-Please use our entry on Zenodo to refer to you used version including a DOI: ENTRY
+Please use our entry on Zenodo to refer a specific version: ENTRY
 
 License
 =======
