@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-.. moduleauthor:: Francesco Witte <francesco.witte@hs-flensburg.de>
-
-"""
 
 import numpy as np
 import pandas as pd
@@ -52,11 +48,11 @@ def detect_cycles(series):
 
     Example
     -------
-    >>> from cycle_detection import dc
+    >>> from cycle_detection import detect_cycles
     >>> import pandas as pd
     >>> arr = np.random.randint(10, size=50)
     >>> series = pd.Series(arr.tolist())
-    >>> cycles = dc(series)
+    >>> cycles = detect_cycles(series)
     >>> type(cycles)
     <class 'pandas.core.frame.DataFrame'>
 

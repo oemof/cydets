@@ -1,20 +1,20 @@
 SPACE FOR BADGES (DOI, PIP VERSION, BUILD, COVERAGE)
 
-This package implements a generic algorithm to detect cycles along with their
-respective amplitude and and duration in a times series.
+This package implements an algorithm to detect cycles in a times series
+along with their respective amplitude and and duration.
 It is maintained as a standalone package within the
 `Open Energy System Modeling Framework <https://oemof.org/>`_.
 
 Algorithmic results have been tested against the well known rainflow cycle counting
 (RFC) method from mechanical engineering and the equivalence of both counting methods
 has been proved.
-The original algorithm has been developed and proposed within the following publication.
+The original algorithm has been developed and proposed within the following publication:
 
 *Dambrowski, Jonny; Pichlmaier, Simon & Jossen, Andreas.
 Mathematical methods for classification of state-of-charge time series for cycle lifetime prediction.
 Advanced Automotive Battery Conference. Orlando, Florida. 2012.*
 
-Thanks again to Simon Pichlmaier for sharing his MATLAB Code and allowing us
+Thanks again to Simon Pichlmaier for sharing his code and allowing us
 to port and publish the algorithm under a free license.
 
 Documentation
@@ -33,6 +33,24 @@ version:
 .. code:: bash
 
   pip install cycle_detecttion
+
+Usage
+=====
+
+The function can be imported and applied to an array-like data structure.
+Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
+
+.. code:: bash
+
+    from cycle_detection import detect_cycles
+    import pandas as pd
+
+    arr = np.random.randint(10, size=50)
+    series = pd.Series(arr.tolist())
+
+    cycles = detect_cycles(series)
+    type(cycles)
+    <class 'pandas.core.frame.DataFrame'>
 
 Citation
 ========
