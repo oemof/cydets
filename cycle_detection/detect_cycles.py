@@ -7,7 +7,6 @@ def detect_cycles(series):
     r"""
     Detect cycles in a time series with information on start, end and depths.
 
-    - Read time series from supplied :code:`path`.
     - Normalize values of time series ts:
 
     .. math::
@@ -352,7 +351,7 @@ def cycling(rows):
 
 def calc_doc(series, rows):
     r"""
-    Calculate depths of cycleself.
+    Calculate depths of cycle.
 
     The depths of the cycle is the minimum height between the minimum value
     of the cycle and the bordering peaks.
