@@ -12,7 +12,7 @@ The original algorithm has been developed and proposed within the following publ
 
 *Dambrowski, Jonny; Pichlmaier, Simon & Jossen, Andreas.
 Mathematical methods for classification of state-of-charge time series for cycle lifetime prediction.
-Advanced Automotive Battery Conference. Orlando, Florida. 2012.*
+Advanced Automotive Battery Conference. Mainz, Germany. 2012.*
 
 Thanks again to Simon Pichlmaier for sharing his code and allowing us
 to port and publish the algorithm under a free license.
