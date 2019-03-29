@@ -46,8 +46,9 @@ def detect_cycles(series):
 
     Example
     -------
-    >>> from cycle_detection import detect_cycles
+    >>> import numpy as np
     >>> import pandas as pd
+    >>> from cycle_detection import detect_cycles
     >>> arr = np.random.randint(10, size=50)
     >>> series = pd.Series(arr.tolist())
     >>> cycles = detect_cycles(series)
