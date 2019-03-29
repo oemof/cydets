@@ -89,6 +89,7 @@ def detect_cycles(series):
     df['t_end'] = cycles[:, 1]
     df['t_minimum'] = cycles[:, 2]
     df['doc'] = cycles[:, 3]
+    df['duration'] = df['t_end'] - df['t_start']
 
     return df
 
