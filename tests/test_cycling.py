@@ -14,12 +14,12 @@ class TestErrors():
         self.df['nones'] = [None, None, None]
 
     @raises(IndexError)
-    def test_IndexError(self, columns=None):
+    def test_IndexError(self):
         """Invoke IndexErrors."""
         detect_cycles(self.df['zeros'])
 
     @raises(TypeError)
-    def test_TypeError(self, columns=None):
+    def test_TypeError(self):
         """Invoke TypeErrors."""
         detect_cycles(self.df['nones'])
 
