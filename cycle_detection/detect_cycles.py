@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-
+"""Main cycle detection algorithm with auxiliary functions."""
 import numpy as np
 import pandas as pd
 
+
 def detect_cycles(series):
     r"""
-    This function detects cycles in a time series with information on start
-    time, end time and depths of cycle:
+    Detect cycles in a time series with information on start, end and depths.
 
     - Read time series from supplied :code:`path`.
     - Normalize values of time series ts:
@@ -62,7 +61,6 @@ def detect_cycles(series):
     :code:`t_end` (endtime), :code:`t_minimum` (time of local minimum in cycle)
     and :code:`doc` (depths of cycle).
     """
-
     # read input data from .csv file
     series = series.to_frame(name='values')
 
@@ -165,8 +163,10 @@ def find_peaks_valleys_idx(series):
 
 def soc_find_start(series, indices):
     """
-    Find the starting times of the precycles. A possible starting point for a
-    cycle is a peak that is higher than specific a succeeding peak.
+    Find the starting times of the precycles.
+
+    A possible starting point for a cycle is a peak that is higher than
+    specific a succeeding peak.
 
     Parameters
     ----------
@@ -206,8 +206,10 @@ def soc_find_start(series, indices):
 
 def soc_find_end(series, indices):
     """
-    Find the ending times of the precycles. A possible ending point for a
-    cycle is a peak that is higher than specific a preceding peak.
+    Find the ending times of the precycles.
+
+    A possible ending point for a cycle is a peak that is higher than specific
+    a preceding peak.
 
     Parameters
     ----------
@@ -247,7 +249,8 @@ def soc_find_end(series, indices):
 
 def search_precycle(series, indices, t_start, t_end):
     """
-    Search for precycles:
+    Search for precycles.
+
     Precycles start at the calculated starting times and end at the next peak
     or start at a previous peak and end at the calculated ending times.
 
@@ -277,7 +280,8 @@ def search_precycle(series, indices, t_start, t_end):
     for c in range(size):
         if t_start[c] < indices[c]:
             # start time must be before time of corresponding peak
-            # retrieve the values of the series between start time and next peak
+            # retrieve the values of the series between start time and
+            # next peak
             values = series[t_start[c]:indices[c] + 1].tolist()
 
             # start time
@@ -291,7 +295,8 @@ def search_precycle(series, indices, t_start, t_end):
 
         if t_end[c] > indices[c]:
             # end time must be after time of corresponding peak
-            # retrieve the values of the series between previous peak and end time
+            # retrieve the values of the series between previous peak and
+            # end time
             values = series[indices[c]:t_end[c] + 1].tolist()
 
             # previous peak
@@ -314,7 +319,7 @@ def search_precycle(series, indices, t_start, t_end):
 
 def cycling(rows):
     """
-    Cycle detection from given precycles by removing overlapping precycles:
+    Detect cycles from given precycles by removing overlapping precycles.
 
     From all precycles with the same timestamp for the minimum value only the
     most narrow precycle is kept. The most narrow precycle is defined by the
@@ -347,8 +352,10 @@ def cycling(rows):
 
 def calc_doc(series, rows):
     r"""
-    Calculation of the depths of cycle: The depths of the cycle is the minimum
-    height between the minimum value of the cycle and the bordering peaks.
+    Calculate depths of cycleself.
+
+    The depths of the cycle is the minimum height between the minimum value
+    of the cycle and the bordering peaks.
 
     .. math::
 
