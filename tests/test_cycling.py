@@ -4,7 +4,7 @@ from nose.tools import eq_, raises
 from cycle_detection.algorithm import detect_cycles
 
 
-class error_tests():
+class TestErrors():
     """"Check for different error messages when wrong arguments are passed."""
 
     def __init__(self):
@@ -24,7 +24,7 @@ class error_tests():
         detect_cycles(self.df['nones'])
 
 
-class example_tests():
+class TestExamples():
     """"Check different examples for obtained results."""
 
     def __init__(self):
