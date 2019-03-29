@@ -49,7 +49,7 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
     arr = np.random.randint(10, size=50)
     series = pd.Series(arr.tolist())
 
-    # detec cycles
+    # detect cycles
     cycles = detect_cycles(series)
 
 Citation
