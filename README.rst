@@ -37,7 +37,8 @@ version.
 Usage
 =====
 
-The function can be imported and applied to an array-like data structure.
+The algorithm can be imported as a function and applied to an array-like data
+structure.
 Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
 
 .. code:: bash
