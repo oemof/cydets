@@ -4,27 +4,27 @@ This package implements a generic algorithm to detect cycles along with their
 respective amplitude and and duration in a times series.
 It is maintained as a standalone package within the
 `Open Energy System Modeling Framework <https://oemof.org/>`_.
+
 Algorithmic results have been tested against the well known rainflow cycle counting
 (RFC) method from mechanical engineering and the equivalence of both counting methods
 has been proved.
-
 The original algorithm has been developed and proposed within the following publication.
 
-Dambrowski, Jonny; Pichlmaier, Simon & Jossen, Andreas.
+*Dambrowski, Jonny; Pichlmaier, Simon & Jossen, Andreas.
 Mathematical methods for classification of state-of-charge time series for cycle lifetime prediction.
-Advanced Automotive Battery Conference. Orlando, Florida. 2012.
+Advanced Automotive Battery Conference. Orlando, Florida. 2012.*
 
 Thanks again to Simon Pichlmaier for sharing his MATLAB Code and allowing us
-to port and publish the algorithm under a free license!
+to port and publish the algorithm under a free license.
 
 Documentation
 =============
 
 The probably most extensive description of the algorithm can be found in the
-paper. In addition, we have tried to document the single parts of the algorithm
-as docstrings within the code.
+abovementioned paper. In addition, we have tried to document the single parts of
+the algorithm as docstrings within the code.
 
-Installing TESPy
+Installation
 ================
 
 If you have a working Python3 environment, use can pypi to install the latest
