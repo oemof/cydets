@@ -3,6 +3,7 @@ import os
 
 
 def read(fname):
+    """Auxiliary function to read file from current folder."""
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
