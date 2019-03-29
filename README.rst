@@ -28,7 +28,7 @@ Installation
 ================
 
 If you have a working Python3 environment, use can pypi to install the latest
-version:
+version.
 
 .. code:: bash
 
@@ -45,12 +45,12 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
     from cycle_detection import detect_cycles
     import pandas as pd
 
+    # create sample data
     arr = np.random.randint(10, size=50)
     series = pd.Series(arr.tolist())
 
+    # detec cycles
     cycles = detect_cycles(series)
-    type(cycles)
-    <class 'pandas.core.frame.DataFrame'>
 
 Citation
 ========
