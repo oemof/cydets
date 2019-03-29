@@ -42,8 +42,9 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
 
 .. code:: bash
 
-    from cycle_detection import detect_cycles
+    import numpy as np
     import pandas as pd
+    from cycle_detection import detect_cycles
 
     # create sample data
     arr = np.random.randint(10, size=50)
