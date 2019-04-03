@@ -10,7 +10,7 @@
 This package implements an algorithm to detect cycles in a times series
 along with their respective amplitude and and duration.
 It is maintained as a standalone package within the
-`Open Energy Modeling Framework <https://oemof.org/>`_.
+`Open Energy Modelling Framework <https://oemof.org/>`_.
 
 Algorithmic results have been tested against the well known rainflow cycle counting
 (RFC) method from mechanical engineering and the equivalence of both counting methods
