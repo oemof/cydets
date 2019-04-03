@@ -63,6 +63,7 @@ Citation
 ========
 
 Please use our entry on Zenodo to refer a specific version:
+
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2624880.svg
    :target: https://doi.org/10.5281/zenodo.2624880
 
