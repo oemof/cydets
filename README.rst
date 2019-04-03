@@ -1,6 +1,6 @@
-.. image:: https://coveralls.io/repos/github/oemof/cycle_detection/badge.svg?branch=dev
-    :target: https://coveralls.io/github/oemof/cycle_detection?branch=dev
-.. image:: https://travis-ci.org/oemof/cycle_detection.svg?branch=dev
+.. image:: https://coveralls.io/repos/github/oemof/cycle_detection/badge.svg?branch=master
+    :target: https://coveralls.io/github/oemof/cycle_detection?branch=master
+.. image:: https://travis-ci.org/oemof/cycle_detection.svg?branch=master
     :target: https://travis-ci.org/oemof/cycle_detection
 .. image:: https://badge.fury.io/py/cycle_detection.svg
     :target: https://badge.fury.io/py/cycle_detection
