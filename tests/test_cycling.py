@@ -12,16 +12,36 @@ class TestErrors():
         self.df = pd.DataFrame()
         self.df['zeros'] = [0, 0, 0]
         self.df['nones'] = [None, None, None]
+        self.df['no_peak'] = [0, 0, 0, 0]
+        self.df['no_valley'] = [0, 1, 0, -1]
+        self.df['no_cycle'] = [0, 1, 2, 3, 2, 1, 0]
 
-    @raises(IndexError)
-    def test_IndexError(self):
-        """Invoke IndexErrors."""
+    @raises(ValueError)
+    def test_ValueError_length(self):
+        """Invoke ValueErrors."""
         detect_cycles(self.df['zeros'])
+
+    @raises(ValueError)
+    def test_ValueError_no_peak(self):
+        """Invoke ValueErrors."""
+        detect_cycles(self.df['no_peak'])
+
+    @raises(ValueError)
+    def test_ValueError_no_valley(self):
+        """Invoke ValueErrors."""
+        detect_cycles(self.df['no_valley'])
+
+    @raises(ValueError)
+    def test_ValueError_no_cycle(self):
+        """Invoke ValueErrors."""
+        detect_cycles(self.df['no_cycle'])
 
     @raises(TypeError)
     def test_TypeError(self):
         """Invoke TypeErrors."""
         detect_cycles(self.df['nones'])
+
+    @raises(ValueError)
 
 
 class TestExamples():

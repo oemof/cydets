@@ -61,6 +61,11 @@ def detect_cycles(series, drop_zero_amplitudes=True):
     :code:`t_end` (endtime), :code:`t_minimum` (time of local minimum in cycle)
     and :code:`doc` (depths of cycle).
     """
+
+    if len(series) < 4:
+        msg = ('The number of elements in the input time series to form one '
+               'cycle must be 4 at least.')
+        raise ValueError(msg)
     # read input data from .csv file
     series = series.to_frame(name='values')
 
@@ -159,6 +164,16 @@ def find_peaks_valleys_idx(series):
         else:
             min_idx += [index - 1]
             start = diff[index]
+
+    # no valley found
+    if len(min_idx) == 0:
+        msg = 'No valleys detected in time series.'
+        raise ValueError(msg)
+
+    # no peaks found
+    if len(max_idx) == 0:
+        msg = 'No peaks detected in time series.'
+        raise ValueError(msg)
 
     # remove first sign change, if at first value of series
     if min_idx[0] <= 0:
@@ -320,6 +335,10 @@ def search_precycle(series, indices, t_start, t_end):
     pre = np.append(pre_a, pre_b, axis=0)
     # remove rows with only zeros (=no precycle found)
     pre = pre[~np.all(pre == 0, axis=1)]
+
+    if len(pre) == 0:
+        msg = 'No cycles detected.'
+        raise ValueError(msg)
     # remove duplicates
     pre = np.unique(pre, axis=0)
     return pre
