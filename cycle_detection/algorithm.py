@@ -95,6 +95,9 @@ def detect_cycles(series, drop_zero_amplitudes=True):
     if drop_zero_amplitudes is True:
         df = df.drop(df[df['doc'] == 0].index)
 
+    # reset the index
+    df = df.reset_index()
+
     return df
 
 
