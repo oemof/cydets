@@ -1,9 +1,9 @@
-.. image:: https://coveralls.io/repos/github/oemof/cycle_detection/badge.svg?branch=master
-    :target: https://coveralls.io/github/oemof/cycle_detection?branch=master
-.. image:: https://travis-ci.org/oemof/cycle_detection.svg?branch=master
-    :target: https://travis-ci.org/oemof/cycle_detection
-.. image:: https://badge.fury.io/py/cycle_detection.svg
-    :target: https://badge.fury.io/py/cycle_detection
+.. image:: https://coveralls.io/repos/github/oemof/cycle-detection/badge.svg?branch=master
+    :target: https://coveralls.io/github/oemof/cycle-detection?branch=master
+.. image:: https://travis-ci.org/oemof/cycle-detection.svg?branch=master
+    :target: https://travis-ci.org/oemof/cycle-detection
+.. image:: https://badge.fury.io/py/cycle-detection.svg
+    :target: https://badge.fury.io/py/cycle-detection
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2555866.svg
    :target: https://doi.org/10.5281/zenodo.2555866
 
@@ -50,13 +50,11 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
 
 .. code:: bash
 
-    import numpy as np
     import pandas as pd
     from cycle_detection import detect_cycles
 
     # create sample data
-    arr = [0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0]
-    series = pd.Series(arr)
+    series = pd.Series([0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0])
 
     # detect cycles
     cycles = detect_cycles(series)
