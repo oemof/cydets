@@ -49,8 +49,8 @@ def detect_cycles(series, drop_zero_amplitudes=True):
     >>> import numpy as np
     >>> import pandas as pd
     >>> from cycle_detection import detect_cycles
-    >>> arr = np.random.randint(10, size=50)
-    >>> series = pd.Series(arr.tolist())
+    >>> arr = [0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0]
+    >>> series = pd.Series(arr)
     >>> cycles = detect_cycles(series)
     >>> type(cycles)
     <class 'pandas.core.frame.DataFrame'>
