@@ -1,4 +1,11 @@
-SPACE FOR BADGES (DOI, PIP VERSION, BUILD, COVERAGE)
+.. image:: https://coveralls.io/repos/github/oemof/cycle_detection/badge.svg?branch=dev
+    :target: https://coveralls.io/github/oemof/cycle_detection?branch=dev
+.. image:: https://travis-ci.org/oemof/cycle_detection.svg?branch=dev
+    :target: https://travis-ci.org/oemof/cycle_detection
+.. image:: https://badge.fury.io/py/cycle_detection.svg
+    :target: https://badge.fury.io/py/cycle_detection
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2555866.svg
+   :target: https://doi.org/10.5281/zenodo.2555866
 
 This package implements an algorithm to detect cycles in a times series
 along with their respective amplitude and and duration.
@@ -48,8 +55,8 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
     from cycle_detection import detect_cycles
 
     # create sample data
-    arr = np.random.randint(10, size=50)
-    series = pd.Series(arr.tolist())
+    arr = [0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0]
+    series = pd.Series(arr)
 
     # detect cycles
     cycles = detect_cycles(series)
