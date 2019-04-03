@@ -4,8 +4,8 @@
     :target: https://travis-ci.org/oemof/cycle-detection
 .. image:: https://badge.fury.io/py/cycle-detection.svg
     :target: https://badge.fury.io/py/cycle-detection
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2624880.svg
-   :target: https://doi.org/10.5281/zenodo.2624880
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2625698.svg
+   :target: https://doi.org/10.5281/zenodo.2625698
 
 This package implements an algorithm to detect cycles in a times series
 along with their respective amplitude and and duration.
@@ -64,8 +64,8 @@ Citation
 
 Please use our entry on Zenodo to refer a specific version:
 
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2624880.svg
-   :target: https://doi.org/10.5281/zenodo.2624880
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2625698.svg
+   :target: https://doi.org/10.5281/zenodo.2625698
 
 License
 =======

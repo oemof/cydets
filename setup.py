@@ -8,7 +8,7 @@ def read(fname):
 
 
 setup(name='cycle_detection',
-      version='0.0.1',
+      version='0.0.2',
       description=(
               'Cycle detetction software. Detect detphs of cycle and cycle '
               'frequency in time series.'),
