@@ -62,10 +62,7 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
 Citation
 ========
 
-Please use our entry on Zenodo to refer a specific version:
-
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2625698.svg
-   :target: https://doi.org/10.5281/zenodo.2625698
+Please use our `entry on Zenodo <https://doi.org/10.5281/zenodo.2625698>`_ to refer a specific version
 
 License
 =======
