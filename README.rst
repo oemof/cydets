@@ -39,7 +39,7 @@ version.
 
 .. code:: bash
 
-  pip install cycle_detecttion
+  pip install cycle_detection
 
 Usage
 =====
