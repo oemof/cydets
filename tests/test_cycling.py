@@ -29,6 +29,16 @@ class TestErrors():
         """Invoke TypeErrors."""
         detect_cycles(self.df['nones'])
 
+    @raises(ValueError)
+    def test_ValueError_length(self):
+        """Invoke ValueErrors."""
+        detect_cycles(pd.Series([0, 1, 0]))
+
+    @raises(ValueError)
+    def test_ValueError_no_cycle(self):
+        """Invoke ValueErrors."""
+        detect_cycles(pd.Series([0, 1, 2, 3, 2, 1, 0]))
+
 
 class TestExamples():
     """"Check different examples for obtained results."""
@@ -47,15 +57,3 @@ class TestExamples():
             cycles = detect_cycles(self.df[column])
             result = cycles.sum().sum()  # sum along column sums (kind of ID)
             eq_(result, expected, 'Test for example ' + column + ' failed.')
-
-
-@raises(ValueError)
-def test_ValueError_length():
-    """Invoke ValueErrors."""
-    detect_cycles(pd.Series([0, 1, 0]))
-
-
-@raises(ValueError)
-def test_ValueError_no_cycle():
-    """Invoke ValueErrors."""
-    detect_cycles(pd.Series([0, 1, 2, 3, 2, 1, 0]))
