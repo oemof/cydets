@@ -1,9 +1,9 @@
-.. image:: https://coveralls.io/repos/github/oemof/cycle-detection/badge.svg?branch=master
-    :target: https://coveralls.io/github/oemof/cycle-detection?branch=master
-.. image:: https://travis-ci.org/oemof/cycle-detection.svg?branch=master
-    :target: https://travis-ci.org/oemof/cycle-detection
-.. image:: https://badge.fury.io/py/cycle-detection.svg
-    :target: https://badge.fury.io/py/cycle-detection
+.. image:: https://coveralls.io/repos/github/oemof/cydets/badge.svg?branch=master
+    :target: https://coveralls.io/github/oemof/cydets?branch=master
+.. image:: https://travis-ci.org/oemof/cydets.svg?branch=master
+    :target: https://travis-ci.org/oemof/cydets
+.. image:: https://badge.fury.io/py/cydets.svg
+    :target: https://badge.fury.io/py/cydets
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.2625698.svg
    :target: https://doi.org/10.5281/zenodo.2625698
 
