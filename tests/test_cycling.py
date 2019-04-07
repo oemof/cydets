@@ -1,7 +1,7 @@
 """Tests for cycle detection package."""
 import pandas as pd
 from nose.tools import eq_, raises
-from cycle_detection.algorithm import detect_cycles
+from cydets.algorithm import detect_cycles
 
 
 class TestErrors():

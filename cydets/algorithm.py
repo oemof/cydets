@@ -47,7 +47,7 @@ def detect_cycles(series, drop_zero_amplitudes=True):
     Example
     -------
     >>> import pandas as pd
-    >>> from cycle_detection import detect_cycles
+    >>> from cydets.algorithm import detect_cycles
     >>> series = pd.Series([0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0])
     >>> cycles = detect_cycles(series)
     >>> type(cycles)

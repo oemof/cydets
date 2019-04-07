@@ -53,7 +53,7 @@ Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
 .. code:: bash
 
     import pandas as pd
-    from cycle_detection import detect_cycles
+    from cydets.algorithm import detect_cycles
 
     # create sample data
     series = pd.Series([0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0])
