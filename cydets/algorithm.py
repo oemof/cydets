@@ -69,7 +69,11 @@ def detect_cycles(series, drop_zero_amplitudes=True):
 
     # norm input data
     series['norm'] = series['values'] - series['values'].min()
-    series['norm'] /= series['norm'].max()
+    maximum = series['norm'].max()
+    if maximum == 0:
+        msg = 'Detected constant time series.'
+        raise ValueError(msg)
+    series['norm'] /= maximum
 
     # find minima and maxima
     min_idx, max_idx = find_peaks_valleys_idx(series['norm'])
