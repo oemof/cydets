@@ -404,6 +404,6 @@ def calc_doc(series, rows):
     doc = np.zeros(num)
 
     for c in range(num):
-        doc[c] = min(series[rows[c, 0]], series[rows[c, 1]]) - rows[c, 3]
+        doc[c] = min(series.iloc[int(rows[c, 0])], series.iloc[int(rows[c, 1])]) - rows[c, 3]
 
     return doc
