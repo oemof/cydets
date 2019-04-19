@@ -64,7 +64,7 @@ def detect_cycles(series, drop_zero_amplitudes=True):
         msg = ('The number of elements in the input time series to form one '
                'cycle must be 4 at least.')
         raise ValueError(msg)
-    # read input data from .csv file
+    # convert input data to a data frame
     series = series.to_frame(name='values')
 
     # norm input data
