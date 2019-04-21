@@ -66,6 +66,7 @@ def detect_cycles(series, drop_zero_amplitudes=True):
         raise ValueError(msg)
     # convert input data to a data frame
     series = series.to_frame(name='values')
+    series.index = pd.RangeIndex(len(series.index))
 
     # norm input data
     series['norm'] = series['values'] - series['values'].min()
@@ -103,7 +104,7 @@ def detect_cycles(series, drop_zero_amplitudes=True):
         df = df.drop(df[df['doc'] == 0].index)
 
     # reset the index
-    df = df.reset_index()
+    df = df.reset_index(drop=True)
 
     return df
 
