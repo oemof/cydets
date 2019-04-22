@@ -66,6 +66,7 @@ def detect_cycles(series, drop_zero_amplitudes=True):
         raise ValueError(msg)
     # convert input data to a data frame
     series = series.to_frame(name='values')
+    series['id'] = series.index
     series.index = pd.RangeIndex(len(series.index))
 
     # norm input data
@@ -93,9 +94,9 @@ def detect_cycles(series, drop_zero_amplitudes=True):
 
     # write data to DataFrame
     df = pd.DataFrame()
-    df['t_start'] = cycles[:, 0]
-    df['t_end'] = cycles[:, 1]
-    df['t_minimum'] = cycles[:, 2]
+    df['t_start'] = series.iloc[cycles[:, 0]]['id'].values
+    df['t_end'] = series.iloc[cycles[:, 1]]['id'].values
+    df['t_minimum'] = series.iloc[cycles[:, 2]]['id'].values
     df['doc'] = cycles[:, 3]
     df['duration'] = df['t_end'] - df['t_start']
 
@@ -409,6 +410,6 @@ def calc_doc(series, rows):
     doc = np.zeros(num)
 
     for c in range(num):
-        doc[c] = min(series.iloc[int(rows[c, 0])], series.iloc[int(rows[c, 1])]) - rows[c, 3]
+        doc[c] = min(series[rows[c, 0]], series[rows[c, 1]]) - rows[c, 3]
 
     return doc
