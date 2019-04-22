@@ -64,12 +64,18 @@ def detect_cycles(series, drop_zero_amplitudes=True):
         msg = ('The number of elements in the input time series to form one '
                'cycle must be 4 at least.')
         raise ValueError(msg)
-    # read input data from .csv file
+    # convert input data to a data frame
     series = series.to_frame(name='values')
+    series['id'] = series.index
+    series.index = pd.RangeIndex(len(series.index))
 
     # norm input data
     series['norm'] = series['values'] - series['values'].min()
-    series['norm'] /= series['norm'].max()
+    maximum = series['norm'].max()
+    if maximum == 0:
+        msg = 'Detected constant time series.'
+        raise ValueError(msg)
+    series['norm'] /= maximum
 
     # find minima and maxima
     min_idx, max_idx = find_peaks_valleys_idx(series['norm'])
@@ -88,9 +94,9 @@ def detect_cycles(series, drop_zero_amplitudes=True):
 
     # write data to DataFrame
     df = pd.DataFrame()
-    df['t_start'] = cycles[:, 0]
-    df['t_end'] = cycles[:, 1]
-    df['t_minimum'] = cycles[:, 2]
+    df['t_start'] = series.iloc[cycles[:, 0]]['id'].values
+    df['t_end'] = series.iloc[cycles[:, 1]]['id'].values
+    df['t_minimum'] = series.iloc[cycles[:, 2]]['id'].values
     df['doc'] = cycles[:, 3]
     df['duration'] = df['t_end'] - df['t_start']
 
@@ -99,7 +105,7 @@ def detect_cycles(series, drop_zero_amplitudes=True):
         df = df.drop(df[df['doc'] == 0].index)
 
     # reset the index
-    df = df.reset_index()
+    df = df.reset_index(drop=True)
 
     return df
 
