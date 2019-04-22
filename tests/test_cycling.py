@@ -3,7 +3,7 @@ import pandas as pd
 from nose.tools import eq_, raises
 from cydets.algorithm import detect_cycles
 from pandas.util.testing import assert_frame_equal
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class TestErrors():
