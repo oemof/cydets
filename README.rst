@@ -8,7 +8,7 @@
    :target: https://doi.org/10.5281/zenodo.2625698
 
 This package implements an algorithm to detect cycles in a times series
-along with their respective amplitude and duration.
+along with their respective depth-of-cycle (DoC) and duration.
 It is maintained as a standalone package within the
 `Open Energy Modelling Framework <https://oemof.org/>`_.
 The acronym *CyDeTS* stands for *(Cy)cle (De)tection in (T)ime (S)eries* and
