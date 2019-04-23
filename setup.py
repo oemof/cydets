@@ -7,8 +7,8 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-setup(name='CyDeTs',
-      version='1.0',
+setup(name='cydets',
+      version='1.1',
       description=(
               'Cycle Detection in Time Series (CyDeTS). An algorithm to '
               'detect cycles in times series along with their respective '
