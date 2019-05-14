@@ -12,7 +12,7 @@ setup(name='cydets',
       description=(
               'Cycle Detection in Time Series (CyDeTS). An algorithm to '
               'detect cycles in times series along with their respective '
-              'amplitude and duration.'),
+              'depth of cycle and duration.'),
       url='https://github.com/oemof/cydets',
       author='Cord Kaldemeyer, Francesco Witte',
       author_email='francesco.witte@hs-flensburg.de',
