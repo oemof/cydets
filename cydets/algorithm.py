@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-def detect_cycles(series, drop_zero_amplitudes=True):
+def detect_cycles(series, drop_zero_docs=True, integer_index=False):
     r"""
     Detect cycles in a time series with information on start, end and depths.
 
@@ -37,6 +37,12 @@ def detect_cycles(series, drop_zero_amplitudes=True):
     ----------
     series : pandas.core.series.Series
         Input time series.
+
+    drop_zero_docs : bool
+        Drop cycles with doc = 0 at the end?
+
+    integer_index : bool
+        Use an integer index instead of the original input time series index?
 
     Returns
     -------
@@ -94,14 +100,25 @@ def detect_cycles(series, drop_zero_amplitudes=True):
 
     # write data to DataFrame
     df = pd.DataFrame()
-    df['t_start'] = series.iloc[cycles[:, 0]]['id'].values
-    df['t_end'] = series.iloc[cycles[:, 1]]['id'].values
-    df['t_minimum'] = series.iloc[cycles[:, 2]]['id'].values
+    if integer_index is True:
+        # use the integer index as time stamps
+        df['t_start'] = cycles[:, 0]
+        df['t_end'] = cycles[:, 1]
+        df['t_minimum'] = cycles[:, 2]
+
+    else:
+        # use original index as time stamps
+        df['t_start'] = series.iloc[cycles[:, 0]]['id'].values
+        df['t_end'] = series.iloc[cycles[:, 1]]['id'].values
+        df['t_minimum'] = series.iloc[cycles[:, 2]]['id'].values
+
+    # write depth of cycle in DataFrame
     df['doc'] = cycles[:, 3]
+    # calculate duration
     df['duration'] = df['t_end'] - df['t_start']
 
     # drop cycles where the amplitude (doc) is zero
-    if drop_zero_amplitudes is True:
+    if drop_zero_docs is True:
         df = df.drop(df[df['doc'] == 0].index)
 
     # reset the index
