@@ -8,7 +8,7 @@ def read(fname):
 
 
 setup(name='cydets',
-      version='1.1',
+      version='1.2 dev',
       description=(
               'Cycle Detection in Time Series (CyDeTS). An algorithm to '
               'detect cycles in times series along with their respective '
