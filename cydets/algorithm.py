@@ -3,7 +3,8 @@ import numpy as np
 import pandas as pd
 
 
-def detect_cycles(series, drop_zero_docs=True, integer_index=False):
+def detect_cycles(series, drop_zero_docs=True, integer_index=False,
+                  local_extrema=False):
     r"""
     Detect cycles in a time series with information on start, end and depths.
 
@@ -44,11 +45,22 @@ def detect_cycles(series, drop_zero_docs=True, integer_index=False):
     integer_index : bool
         Use an integer index instead of the original input time series index?
 
+    local_extrema : bool
+        Do you want to return all local minima and maxima as well?
+
     Returns
     -------
     df : pandas.core.frame.DataFrame
         Dataframe containing the cycles start times, end times, local minima
         and depth of cycle (doc).
+
+    min_idx : list
+        List of indices with minimum values of the time series (Only if
+        parameter local_extrema is True!).
+
+    max_idx : list
+        List of indices with maximum values of the time series (Only if
+        parameter local_extrema is True!).
 
     Example
     -------
@@ -124,7 +136,10 @@ def detect_cycles(series, drop_zero_docs=True, integer_index=False):
     # reset the index
     df = df.reset_index(drop=True)
 
-    return df
+    if local_extrema is True:
+        return df, min_idx, max_idx
+    else:
+        return df
 
 
 def find_peaks_valleys_idx(series):
