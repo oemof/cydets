@@ -24,7 +24,9 @@ Mathematical methods for classification of state-of-charge time series for cycle
 Advanced Automotive Battery Conference. Mainz, Germany. 2012.*
 
 Thanks again to Simon Pichlmaier for sharing his code and allowing us
-to port and publish the algorithm under a free license.
+to port and publish the algorithm under a free license. For the original publication
+please refer to Simon directly via
+`Researchgate <https://www.researchgate.net/publication/310317849>`_.
 
 Documentation
 =============
