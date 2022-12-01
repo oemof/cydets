@@ -52,7 +52,7 @@ The algorithm is implemented as a function which takes an array-like data
 structure as argument.
 Results are returned as a `pandas <https://pandas.pydata.org/>`_ dataframe.
 
-.. code:: bash
+.. code:: python
 
     import pandas as pd
     from cydets.algorithm import detect_cycles
